@@ -56,4 +56,5 @@ export class CategoriasService {
       map(categorias => categorias.slice(0, 4))
     );
   }
+
 }

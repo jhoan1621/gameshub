@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, ActivatedRoute, Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Categoria } from '../../interfaces/categoria.interface';
-import { CategoriasService } from '../../services/categorias.service';
+import { JuegosDataService } from '../../services/juegos-data.service';
+import { map } from 'rxjs';
+
 @Component({
   selector: 'app-estadisticas',
   standalone: true,
@@ -15,11 +17,23 @@ import { CategoriasService } from '../../services/categorias.service';
 })
 export class EstadisticasComponent implements OnInit {
   
-  estadisticasConContador$!: Observable<Array<Categoria & { contador: number }>>;
-    
-    constructor(private estadisticasService: CategoriasService) {}
-    
-    ngOnInit(): void {
-      this.estadisticasConContador$ = this.estadisticasService.obtenerCategoriasConContador();
-    }
+  estadisticas$!:Observable<{
+    totalgames: number;
+    gratis: number;
+    paga: number;
+  }>;
+  
+  constructor(private juegosService: JuegosDataService) {}
+
+  ngOnInit(): void {
+    this.estadisticas$ = this.juegosService.juegos$.pipe(
+      map(juegos => {
+        let totalgames = juegos.length;
+        let gratis = juegos.filter(j => j.esGratis).length;
+        let paga = totalgames - gratis;
+             
+        return { totalgames, gratis, paga};
+      })
+    );
+  }
 }

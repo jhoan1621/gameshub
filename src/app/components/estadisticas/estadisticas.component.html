@@ -19,27 +19,43 @@
       <p class="text-secondary"></p>
     </div>
     
-    @if(estadisticasConContador$ | async; as categorias) {
+    <div *ngIf="estadisticas$ | async as categorias" class="p-4">
       <div class="stats-grid">
-        @for(categoria of categorias; track categoria.id) {
+        
           <div class="stat-category-card">
-            <div class="stat-icon" [style.color]="categoria.color">
-              <i class="bi" [class]="categoria.icono"></i>
+            <div class="stat-icon" >
+              <i class="bi" ></i>
             </div>
             <h4>Total de juegos en plataforma</h4>
-            <div class="stat-number" [style.color]="categoria.color">{{categoria.contador}}</div>
-            <div class="stat-label"></div>
-            <div class="stat-bar">
-              <div class="stat-fill" 
-                   [style.width.%]="(categoria.contador / 15) * 100"
-                   [style.background-color]="categoria.color"></div>
-            </div>
+            <div class="stat-number" >{{categorias.totalgames}}</div>
+            <div class="stat-label">juegos disponibles</div>
+            <div class="stat-bar"></div>
           </div>
-        }
+          <div class="stat-category-card">
+            <div class="stat-icon" >
+              <i class="bi" ></i>
+            </div>
+            <h4>Juegos gratis</h4>
+            <div class="stat-number" >{{categorias.gratis}}</div>
+            <div class="stat-label">juegos disponibles</div>
+            <div class="stat-bar"></div>
+          </div>
+          <div class="stat-category-card">
+            <div class="stat-icon" >
+              <i class="bi" ></i>
+            </div>
+            <h4>Juegos de paga</h4>
+            <div class="stat-number" >{{categorias.paga}}</div>
+            <div class="stat-label">juegos disponibles</div>
+            <div class="stat-bar"></div>
+          </div>
       </div>
-    }
   </div>
+  
+  </div>
+  
 </section>
+
 
 <!-- Call to Action -->
 <section class="cta-section py-5">
