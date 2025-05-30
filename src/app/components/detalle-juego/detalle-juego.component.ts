@@ -39,6 +39,7 @@ export class DetalleJuegoComponent implements OnInit {
       }
     });
   }
+
   
   volver(): void {
     this.router.navigate(['/juegos']);

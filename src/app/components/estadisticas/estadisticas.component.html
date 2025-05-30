@@ -1,0 +1,64 @@
+<section class="categories-header py-5 bg-darker">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8">
+        <h1 class="title-gaming mb-4">Categorías de Juegos</h1>
+        <p class="lead text-secondary">
+          Explora nuestras estadisticas para enterarte de los juegos en tendencia
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Estadísticas por Categoría -->
+<section class="py-5 bg-darker">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="subtitle-gaming">Estadísticas </h2>
+      <p class="text-secondary"></p>
+    </div>
+    
+    @if(estadisticasConContador$ | async; as categorias) {
+      <div class="stats-grid">
+        @for(categoria of categorias; track categoria.id) {
+          <div class="stat-category-card">
+            <div class="stat-icon" [style.color]="categoria.color">
+              <i class="bi" [class]="categoria.icono"></i>
+            </div>
+            <h4>Total de juegos en plataforma</h4>
+            <div class="stat-number" [style.color]="categoria.color">{{categoria.contador}}</div>
+            <div class="stat-label"></div>
+            <div class="stat-bar">
+              <div class="stat-fill" 
+                   [style.width.%]="(categoria.contador / 15) * 100"
+                   [style.background-color]="categoria.color"></div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section py-5">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8">
+        <h2 class="subtitle-gaming mb-4">¿Listo para Explorar?</h2>
+        <p class="text-secondary mb-4">
+          Sumérgete en cualquiera de nuestras categorías y descubre tu próximo juego favorito
+        </p>
+        <div class="cta-buttons">
+          <a routerLink="/juegos" class="btn btn-gaming me-3">
+            <i class="bi bi-collection"></i> Ver Todos los Juegos
+          </a>
+          <a routerLink="/" class="btn btn-gaming-outline">
+            <i class="bi bi-house-door"></i> Volver al Inicio
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
